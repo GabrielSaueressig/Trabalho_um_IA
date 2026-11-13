@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
-caminho_arquivo = 'dataSet/programaRodofaunaAtropelada.xlsx'
+caminho_arquivo = 'dataSet/ProgramaRodofaunaAtropelada.xlsx'
 df = pd.read_excel(caminho_arquivo)
 
 df = df[df['silvestre_'].astype(str).str.strip().str.lower() == 'silvestre'].copy()

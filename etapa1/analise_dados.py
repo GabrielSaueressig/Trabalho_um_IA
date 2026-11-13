@@ -146,7 +146,7 @@ def analise_dados(df):
     possiveis_problemas(df)
 
 
-caminho_arquivo = 'dataSet/programaRodofaunaAtropelada.xlsx'
+caminho_arquivo = 'dataSet/ProgramaRodofaunaAtropelada.xlsx'
 df = pd.read_excel(caminho_arquivo)
 df = df[df["silvestre_"].astype(str).str.strip().str.lower() == "silvestre"].copy()
 analise_dados(df)
