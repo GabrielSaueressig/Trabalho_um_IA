@@ -1,0 +1,23 @@
+{
+  "importancia_permutacao": {
+    "MLP otimizada": {
+      "uc (Unidade de Conservação)": 0.1762,
+      "ano": 0.2238,
+      "dia_da_sem": 0.2091,
+      "x (UTM leste)": 0.2634,
+      "y (UTM norte)": 0.2319,
+      "mês (sen+cos)": 0.2949
+    },
+    "Random Forest": {
+      "uc (Unidade de Conservação)": 0.0386,
+      "ano": 0.1055,
+      "dia_da_sem": 0.1326,
+      "x (UTM leste)": 0.1418,
+      "y (UTM norte)": 0.1553,
+      "mês (sen+cos)": 0.2556
+    }
+  },
+  "baseline_sempre_aves_acc": 0.680482290881688,
+  "hotspots_limiar": 44.0,
+  "n_segmentos": 293
+}

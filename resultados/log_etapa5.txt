@@ -1,0 +1,40 @@
+--- CARREGANDO DADOS MULTICLASSE ---
+
+--- Rodando o Optuna (80 trials) ---
+Trials: {'PRUNED': 50, 'COMPLETE': 30}
+Tempo da busca: 9.7 min
+Melhor trial: 63
+Melhor F1 Macro (validação): 0.6311
+Melhores hiperparâmetros: {'n_camadas': 3, 'neuronios_c1': 212, 'neuronios_c2': 173, 'neuronios_c3': 200, 'activation': 'relu', 'solver': 'adam', 'lr': 0.003682681933637015, 'batch_size': 256, 'alpha': 1.0423159381397816e-06, 'max_epocas': 300}
+
+Importância dos hiperparâmetros:
+batch_size      0.246
+max_epocas      0.233
+lr              0.232
+neuronios_c1    0.224
+n_camadas       0.039
+alpha           0.022
+solver          0.002
+activation      0.002
+
+Configuração otimizada: {'camadas': [212, 173, 200], 'activation': 'relu', 'solver': 'adam', 'lr': 0.003682681933637015, 'batch_size': 256, 'alpha': 1.0423159381397816e-06, 'momentum': 0.9, 'nesterov': True} | épocas: 245
+
+Desempenho por classe - MLP otimizada (teste aleatório):
+              precision    recall  f1-score   support
+
+    Anfíbios     0.4627    0.7561    0.5741        82
+        Aves     0.8804    0.7497    0.8098       903
+   Mamíferos     0.4632    0.6519    0.5415       135
+     Répteis     0.5171    0.5845    0.5488       207
+
+    accuracy                         0.7144      1327
+   macro avg     0.5808    0.6856    0.6185      1327
+weighted avg     0.7554    0.7144    0.7272      1327
+
+
+--- MLP ORIGINAL x MLP OTIMIZADA (TESTE) ---
+       Modelo              Divisão  Accuracy  Precision Macro  Recall Macro  F1 Macro  Tempo treino (s)  Épocas
+ MLP original            Aleatória    0.5305           0.4422        0.5709    0.4554            9.7662     354
+MLP otimizada            Aleatória    0.7144           0.5808        0.6856    0.6185           25.5525     245
+ MLP original Temporal (2014–2015)    0.3680           0.2896        0.3201    0.2565           12.0595     340
+MLP otimizada Temporal (2014–2015)    0.5733           0.3184        0.3135    0.3136           29.2202     245

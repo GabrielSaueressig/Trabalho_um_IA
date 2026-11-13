@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 
 
-caminho_arquivo = 'dataSet/programaRodofaunaAtropelada.xlsx'
+caminho_arquivo = 'dataSet/ProgramaRodofaunaAtropelada.xlsx'
 df = pd.read_excel(caminho_arquivo)
 
 # Filtrar apenas fauna silvestre e remover registros sem identificação taxonômica

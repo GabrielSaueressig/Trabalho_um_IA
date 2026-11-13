@@ -1,0 +1,48 @@
+{
+  "n_trials": 80,
+  "estados": {
+    "PRUNED": 50,
+    "COMPLETE": 30
+  },
+  "tempo_busca_min": 10.36561550925,
+  "tempo_medio_trial_s": 11.83913057726666,
+  "melhor_trial": 63,
+  "melhor_f1_val": 0.6310835433784276,
+  "melhores_params": {
+    "n_camadas": 3,
+    "neuronios_c1": 212,
+    "neuronios_c2": 173,
+    "neuronios_c3": 200,
+    "activation": "relu",
+    "solver": "adam",
+    "lr": 0.003682681933637015,
+    "batch_size": 256,
+    "alpha": 1.0423159381397816e-06,
+    "max_epocas": 300
+  },
+  "melhor_epoca": 245,
+  "importancias": {
+    "batch_size": 0.24614854730010813,
+    "max_epocas": 0.23270790464529226,
+    "lr": 0.23213964383065594,
+    "neuronios_c1": 0.2240407549773272,
+    "n_camadas": 0.03912465516791448,
+    "alpha": 0.021708761243485877,
+    "solver": 0.0022325090851619566,
+    "activation": 0.0018972237500540635
+  },
+  "params_otimizados": {
+    "camadas": [
+      212,
+      173,
+      200
+    ],
+    "activation": "relu",
+    "solver": "adam",
+    "lr": 0.003682681933637015,
+    "batch_size": 256,
+    "alpha": 1.0423159381397816e-06,
+    "momentum": 0.9,
+    "nesterov": true
+  }
+}
