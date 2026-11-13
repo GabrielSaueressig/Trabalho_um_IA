@@ -17,7 +17,7 @@ df = df[df['classe'].astype(str).str.lower() != 'nao_identificado'].copy()
 df['uc'] = df['uc'].astype(str).str.strip().str.lower()
 df['dia_da_sem'] = df['dia_da_sem'].astype(str).str.strip().str.lower()
 
-# 2. Extração da Data e Tratamento de NaNs
+# Extração da Data e Tratamento de NaNs
 df['data_dt'] = pd.to_datetime(df['data_dt'], format='%d/%m/%y', errors='coerce')
 df = df.dropna(subset=['data_dt']).copy()
 df['mes_num'] = df['data_dt'].dt.month
@@ -26,7 +26,7 @@ df['mes_num'] = df['data_dt'].dt.month
 df['mes_sin'] = np.sin(2 * np.pi * df['mes_num'] / 12)
 df['mes_cos'] = np.cos(2 * np.pi * df['mes_num'] / 12)
 
-# 3. Definição dos Preditores (X) e Alvo (y)
+# Definição dos Preditores (X) e Alvo (y)
 colunas_categoricas_nominais = ['uc', 'dia_da_sem']
 colunas_numericas_continuas = ['x', 'y', 'ano', 'mes_sin', 'mes_cos']
 
@@ -36,19 +36,12 @@ X = df[colunas_categoricas_nominais + colunas_numericas_continuas].copy()
 le_target = LabelEncoder()
 y = le_target.fit_transform(df['classe'])
 
-# ==============================================================================
-# ESTRATÉGIA A: DIVISÃO ALEATÓRIA ESTRATIFICADA (70% Treino, 15% Val, 15% Teste)
-# ==============================================================================
-X_train_val, X_test, y_train_val, y_test = train_test_split(
-    X, y, test_size=0.15, random_state=42, stratify=y
-)
+
+# DIVISÃO ALEATÓRIA ESTRATIFICADA 
+X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.15, random_state=42, stratify=y)
 
 X_train, X_val, y_train, y_val = train_test_split(
-    X_train_val,
-    y_train_val,
-    test_size=0.1765,
-    random_state=42,
-    stratify=y_train_val,
+    X_train_val, y_train_val, test_size=0.1765, random_state=42, stratify=y_train_val,
 )
 
 preprocessador_a = ColumnTransformer(
@@ -62,9 +55,8 @@ X_train_proc = preprocessador_a.fit_transform(X_train)
 X_val_proc = preprocessador_a.transform(X_val)
 X_test_proc = preprocessador_a.transform(X_test)
 
-# ==============================================================================
-# ESTRATÉGIA B: DIVISÃO TEMPORAL (2010–2013 Treino | 2014–2015 Teste)
-# ==============================================================================
+# DIVISÃO TEMPORAL
+
 mascara_treino_temp = df['ano'] <= 2013
 mascara_teste_temp = df['ano'] >= 2014
 
@@ -84,9 +76,8 @@ preprocessador_b = ColumnTransformer(
 X_train_temp_proc = preprocessador_b.fit_transform(X_train_temp)
 X_test_temp_proc = preprocessador_b.transform(X_test_temp)
 
-# ==============================================================================
-# EXPORTAÇÃO DOS DATASETS PROCESSADOS PARA CSV
-# ==============================================================================
+
+# EXPORTAÇÃO PARA CSV
 os.makedirs('dataSet/treinoTesteValidacao', exist_ok=True)
 
 colunas_proc_a = preprocessador_a.get_feature_names_out()

@@ -9,8 +9,7 @@ from sklearn.utils.class_weight import compute_sample_weight
 
 os.makedirs('img', exist_ok=True)
 
-# 1. Carregar os CSVs dos Segmentos de 500m
-print('--- CARREGANDO DADOS DOS SEGMENTOS (500m) ---')
+# Carregar os CSVs dos Segmentos de 500m
 train_seg = pd.read_csv(
     'dataSet/treinoTesteValidacaoSegmentos/treino_segmentos.csv'
 )
@@ -32,9 +31,9 @@ y_test = test_seg['target_binario']
 
 pesos_train = compute_sample_weight('balanced', y_train)
 
-# ==============================================================================
-# 2. TREINAMENTO DA MLP BINÁRIA
-# ==============================================================================
+
+# TREINAMENTO DA MLP BINÁRIA
+
 print('\n--- Treinando MLP Binária ---')
 mlp_bin = MLPClassifier(
     hidden_layer_sizes=(128, 64, 32),
@@ -51,9 +50,9 @@ mlp_bin.fit(X_train, y_train, sample_weight=pesos_train)
 y_pred_mlp = mlp_bin.predict(X_test)
 y_probs_mlp = mlp_bin.predict_proba(X_test)[:, 1]
 
-# ==============================================================================
-# 3. TREINAMENTO DA RANDOM FOREST BINÁRIA (MODELO TRADICIONAL)
-# ==============================================================================
+
+# TREINAMENTO DA RANDOM FOREST BINÁRIA
+
 print('--- Treinando Random Forest Binária ---')
 rf_bin = RandomForestClassifier(n_estimators=100, max_depth=12, class_weight='balanced', random_state=42)
 rf_bin.fit(X_train, y_train)
@@ -62,9 +61,9 @@ y_pred_rf = rf_bin.predict(X_test)
 y_probs_rf = rf_bin.predict_proba(X_test)[:, 1]
 
 
-# ==============================================================================
-# 4. CÁLCULO DAS MÉTRICAS EXIGIDAS
-# ==============================================================================
+
+#CÁLCULO DAS MÉTRICAS
+
 def calcular_metricas_binarias(y_true, y_pred, y_probs):
   return {
       'Accuracy': accuracy_score(y_true, y_pred),
@@ -86,14 +85,10 @@ df_resumo_binario = pd.DataFrame([
     },
 ])
 
-print('\n===============================================================')
-print('  RESULTADOS BINÁRIOS: ALTO RISCO (1) VS. BAIXO RISCO (0)      ')
-print('===============================================================')
 print(df_resumo_binario.to_string(index=False))
 
-# ==============================================================================
-# 5. PLOTAR E SALVAR A CURVA ROC E MATRIZ DE CONFUSÃO
-# ==============================================================================
+# SALVAR A CURVA ROC E MATRIZ DE CONFUSÃO
+
 fpr_mlp, tpr_mlp, _ = roc_curve(y_test, y_probs_mlp)
 fpr_rf, tpr_rf, _ = roc_curve(y_test, y_probs_rf)
 

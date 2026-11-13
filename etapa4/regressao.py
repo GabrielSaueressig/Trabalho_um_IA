@@ -8,7 +8,7 @@ from sklearn.neural_network import MLPRegressor
 
 os.makedirs('img', exist_ok=True)
 
-print('--- CARREGANDO DADOS DE REGRESSÃO (SEGMENTOS 500m) ---')
+
 train_seg = pd.read_csv('dataSet/treinoTesteValidacaoSegmentos/treino_segmentos.csv')
 val_seg = pd.read_csv('dataSet/treinoTesteValidacaoSegmentos/validacao_segmentos.csv')
 test_seg = pd.read_csv('dataSet/treinoTesteValidacaoSegmentos/teste_segmentos.csv')
@@ -22,7 +22,7 @@ y_val = val_seg['target_regressao']
 X_test = test_seg.drop(columns=['target_regressao', 'target_binario'])
 y_test = test_seg['target_regressao']
 
-print('\n--- Treinando MLPRegressor e Gerando Curva de Loss ---')
+
 epocas = 200
 
 mlp_reg = MLPRegressor(
@@ -126,7 +126,7 @@ df_resumo_regressao = pd.DataFrame([
 print(df_resumo_regressao.to_string(index=False))
 
 
-# Gráfico 1: Valores Reais vs. Valores Preditos (MLP)
+# Valores Reais vs. Valores Preditos
 plt.figure(figsize=(7, 6))
 plt.scatter(y_test, y_pred_mlp, alpha=0.6, color='blue', label='Predições MLP')
 max_val = max(y_test.max(), y_pred_mlp.max())
@@ -150,7 +150,7 @@ plt.tight_layout()
 plt.savefig('img/reais_vs_preditos_mlp.png')
 plt.show()
 
-# Gráfico 2: Gráfico de Resíduos (Resíduo = Real - Predito)
+# Gráfico de Resíduos (Resíduo = Real - Predito)
 residuos_mlp = y_test - y_pred_mlp
 
 plt.figure(figsize=(8, 5))

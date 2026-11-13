@@ -8,7 +8,7 @@ from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
 
-# 1. Carregar os CSVs da Estratégia A (Divisão Aleatória)
+# Carregar os CSVs da Estratégia A
 train = pd.read_csv('dataSet/treinoTesteValidacao/treino.csv')
 val = pd.read_csv('dataSet/treinoTesteValidacao/validacao.csv')
 test = pd.read_csv('dataSet/treinoTesteValidacao/teste.csv')    
@@ -99,7 +99,7 @@ classes_nomes = ['Anfíbios', 'Aves', 'Mamíferos', 'Répteis']
 
 # Melhor arquitetura encontrada na validação: Config 3 (128, 64, 32 | alpha=0.05)
 # DATASET ALEATORIO
-print('\n=== EXPERIMENTO A: DIVISÃO ALEATÓRIA ESTRATIFICADA (TESTE FINAL) ===')
+
 pesos_train = compute_sample_weight('balanced', y_train)
 
 mlp = MLPClassifier(
@@ -319,7 +319,4 @@ df_comparacao_multi = pd.DataFrame([
     },
 ])
 
-print('\n===============================================================')
-print('  TABELA COMPARATIVA MULTICLASSE: MLP VS. RANDOM FOREST        ')
-print('===============================================================')
 print(df_comparacao_multi.to_string(index=False))
